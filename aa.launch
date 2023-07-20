@@ -1,0 +1,29 @@
+<launch>
+<node name="camera" pkg="usb_cam" ...
+...
+<include file="$(find xycar_ultrasonic)/launch ...
+<include file="$(find xycar_imu)/launch ...
+<include file="$(find xycar_motor)/launch ...
+<node name="best_driver" pkg="my_program" ...
+</launch>
+
+<node name="usb_cam" pkg="usb_cam" type="usb_cam_node" output="screen">
+<param name="video_device" value="/dev/video0" />
+<param name="autoexposure" value="false"/>
+<param name="exposure" value="150"/>
+<param name="image_width" value="640" />
+<param name="image_height" value="480" />
+<param name="pixel_format" value="yuyv" />
+<param name="io_method" value="mmap"/>
+<param name="camera_name" value="usb_cam" />
+<param name="camera_frame_id" value="usb_cam" />
+</node>
+
+<!-- Ultrasonic sensor node -->
+<include file="$(find xycar_ultrasonic)/launch/xycar_ultrasonic.launch" />
+
+<!-- IMU sensor node -->
+<include file="$(find xycar_imu)/launch/xycar_imu.launch" />
+
+<!– Motor node -->
+<include file="$(find xycar_motor)/launch/xycar_motor.launch" />
